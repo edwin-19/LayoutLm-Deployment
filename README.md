@@ -1,5 +1,5 @@
 # LayoutLM - Deployment
-Repo to test conversion of SOTA layoutlm model detection
+Repo to test conversion of SOTA layoutlm model conversion and deployment
 
 ## TODO
 - [ ] Create inference script for demo for script

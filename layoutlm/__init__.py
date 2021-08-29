@@ -3,3 +3,4 @@ from .modeling.layoutlm import (
     LayoutlmForSequenceClassification,
     LayoutlmForTokenClassification,
 )
+from .data.funsd import FunsdDataset

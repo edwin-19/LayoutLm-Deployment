@@ -5,6 +5,7 @@ import os
 from PIL import Image
 from transformers import AutoTokenizer
 
+
 def bbox_string(box, width, length):
     return (
         str(int(1000 * (box[0] / width)))
@@ -15,7 +16,8 @@ def bbox_string(box, width, length):
         + " "
         + str(int(1000 * (box[3] / length)))
     )
-    
+
+
 def actual_bbox_string(box, width, length):
     return (
         str(box[0])
@@ -30,7 +32,8 @@ def actual_bbox_string(box, width, length):
         + " "
         + str(length)
     )
-    
+
+
 def convert(args):
     with open(
         os.path.join(args.output_dir, args.data_split + ".txt.tmp"),
@@ -47,23 +50,19 @@ def convert(args):
     ) as fiw:
         for file in os.listdir(args.data_dir):
             file_path = os.path.join(args.data_dir, file)
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, "r", encoding="utf8") as f:
                 data = json.load(f)
-                
             image_path = file_path.replace("annotations", "images")
-            image_path = image_path.replace('json', 'png')
+            image_path = image_path.replace("json", "png")
             file_name = os.path.basename(image_path)
             image = Image.open(image_path)
             width, length = image.size
-            
-            for item in data['form']:
-                words, label = item['words'], item['label']
+            for item in data["form"]:
+                words, label = item["words"], item["label"]
                 words = [w for w in words if w["text"].strip() != ""]
-                
                 if len(words) == 0:
                     continue
-                
-                if label == 'other':
+                if label == "other":
                     for w in words:
                         fw.write(w["text"] + "\tO\n")
                         fbw.write(
@@ -148,6 +147,7 @@ def convert(args):
             fbw.write("\n")
             fiw.write("\n")
 
+
 def seg_file(file_path, tokenizer, max_len):
     subword_len_counter = 0
     output_path = file_path[:-4]
@@ -156,7 +156,7 @@ def seg_file(file_path, tokenizer, max_len):
     ) as fw_p:
         for line in f_p:
             line = line.rstrip()
-            
+
             if not line:
                 fw_p.write(line + "\n")
                 subword_len_counter = 0
@@ -178,9 +178,12 @@ def seg_file(file_path, tokenizer, max_len):
             subword_len_counter += current_subwords_len
 
             fw_p.write(line + "\n")
-            
+
+
 def seg(args):
-    tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path, do_lower_case=True)
+    tokenizer = AutoTokenizer.from_pretrained(
+        args.model_name_or_path, do_lower_case=True
+    )
     seg_file(
         os.path.join(args.output_dir, args.data_split + ".txt.tmp"),
         tokenizer,
@@ -197,6 +200,7 @@ def seg(args):
         args.max_len,
     )
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -207,6 +211,6 @@ if __name__ == "__main__":
     parser.add_argument("--model_name_or_path", type=str, default="bert-base-uncased")
     parser.add_argument("--max_len", type=int, default=510)
     args = parser.parse_args()
-    
+
     convert(args)
     seg(args)

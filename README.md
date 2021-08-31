@@ -42,7 +42,7 @@ python test_trion_client.py
 - [x] Convert model from torch to onnx
 - [x] Load model to trition inference server
 - [x] Write triton inference script for deployment
-- [ ] Write onnxruntime infer script
+- [x] Write onnxruntime infer script
 
 ## TODO Clean up
 - [x] Write py file for conversion

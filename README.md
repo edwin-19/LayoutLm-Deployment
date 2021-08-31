@@ -1,6 +1,15 @@
 # LayoutLM - Deployment
 Repo to test conversion of SOTA layoutlm model conversion and deployment
 
+# How it works
+- To convert for trition usage, the model file must be either one of 2 formats in this case the base model is in pytorch, to use it in deployment, it must first be in this format:
+    - Libtorch
+    - ONNX
+
+This tutorial focuses on converting it to onnx, and it will use on the SEQ Labelling Task, the other will be on hold for now
+
+NOTE: The tokenizer that comes with it cannot be convert to onnx, therefore it has to be seperated into 2 components
+
 # Installation
 1) Clone the repo
 ```bash
@@ -35,7 +44,6 @@ docker run --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/mnt/882eb9b0-111
 python test_trion_client.py
 ```
 
-
 ## TODO
 - [x] Data parser
 - [x] Create inference script for demo for script
@@ -48,6 +56,10 @@ python test_trion_client.py
 - [x] Write py file for conversion
 - [x] Write py file for deployment
 
+## Future Improvement
+- [ ] Wrap up in a fastapi/flask for more complete tutorial
+
+
 # Reference
 - You can check the original REPO code here
-https://github.com/microsoft/unilm/tree/master/layoutlm/deprecated
+    - https://github.com/microsoft/unilm/tree/master/layoutlm/deprecated

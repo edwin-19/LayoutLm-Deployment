@@ -41,13 +41,15 @@ def get_triton_input_output_shape():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('-u', '--url', default='localhost:8000')
+    parser.add_argument('--model_name', default='layoutlm_onnx')
     parser.add_argument('-m', '--model_dir', default='model/layoutlm-base-uncased/')
     parser.add_argument('-l', '--label_dir', default='data/infer_data/labels.txt')
     parser.add_argument('-d', '--data_dir', default='data/infer_data/')
     
     args = parser.parse_args()
     
-    client = httpclient.InferenceServerClient('localhost:8000')
+    client = httpclient.InferenceServerClient(args.url)
     
     tokenizer = AutoTokenizer.from_pretrained(args.model_dir)
     labels = utils.get_labels(args.label_dir)
@@ -91,7 +93,7 @@ if __name__ == '__main__':
     
     # Run inference to triton server
     results = client.infer(
-        'layoutlm_onnx',inputs, outputs=outputs,    
+        args.model_name,inputs, outputs=outputs,    
     )
     
     # Get result - must specify output name, check pbtxt for more info

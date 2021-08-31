@@ -10,7 +10,11 @@ This tutorial focuses on converting it to onnx, and it will use on the SEQ Label
 
 NOTE: The tokenizer that comes with it cannot be convert to onnx, therefore it has to be seperated into 2 components
 
-# Installation
+# Model Download
+TBA
+
+# How to run
+## Run using triton inference server
 1) Clone the repo
 ```bash
 git clone https://github.com/edwin-19/LayoutLm-Deployment.git
@@ -44,6 +48,17 @@ docker run --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/mnt/882eb9b0-111
 python test_trion_client.py
 ```
 
+## Run using onnxruntime
+The other option is to test directly with a python script
+
+Note: This option uses random to randomly generate the numbers therefore it does not work very well
+1) First download or convert the model to onnx
+
+2) Run the following python script
+```bash
+python demo_onnx_runtime.py
+```
+
 ## TODO
 - [x] Data parser
 - [x] Create inference script for demo for script
@@ -57,8 +72,9 @@ python test_trion_client.py
 - [x] Write py file for deployment
 
 ## Future Improvement
-- [ ] Wrap up in a fastapi/flask for more complete tutorial
-
+- [ ] Wrap up in a fastapi/flask for more complete repo
+- [ ] Classification Model to ONNX
+- [ ] Set to deploy in trition
 
 # Reference
 - You can check the original REPO code here

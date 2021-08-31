@@ -9,5 +9,5 @@ Repo to test conversion of SOTA layoutlm model conversion and deployment
 - [x] Write triton inference script for deployment
 
 ## TODO Clean up
-- [ ] Write py file for conversion
-- [ ] Write py file for deployment
+- [x] Write py file for conversion
+- [x] Write py file for deployment

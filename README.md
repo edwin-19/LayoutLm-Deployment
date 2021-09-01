@@ -22,6 +22,12 @@ NOTE: The tokenizer that comes with it cannot be convert to onnx, therefore it h
 git clone https://github.com/edwin-19/LayoutLm-Deployment.git
 ```
 
+1.b) Pull the nvidia triton docker image, you can change 21.07 to any other version
+- Depending on your cuda version you need to check for compatibility [here](https://docs.nvidia.com/deeplearning/triton-inference-server/release-notes/index.html)
+```bash
+docker pull nvcr.io/nvidia/tritonserver:21.07-py3 # pulling latest at the moment
+```
+
 2) Download and preprocess the data
 ```bash
 ./preprocess.sh

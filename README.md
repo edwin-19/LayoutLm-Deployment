@@ -11,7 +11,9 @@ This tutorial focuses on converting it to onnx, and it will use on the SEQ Label
 NOTE: The tokenizer that comes with it cannot be convert to onnx, therefore it has to be seperated into 2 components
 
 # Model Download
-TBA
+| Model Name                  | Link                                                                   |
+|-----------------------------|------------------------------------------------------------------------|
+| LayoutLM-Seq Labelling ONNX | https://drive.google.com/file/d/1AC8zF2Ic395ybMyXzCmi0xbO7zj0VxFo/view |
 
 # How to run
 ## Run using triton inference server
@@ -46,6 +48,18 @@ docker run --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/mnt/882eb9b0-111
 - Runs and specify localhost:8000
 ```bash
 python test_trion_client.py
+```
+
+NOTES:
+- Please follow the structure as such
+- The model name must be "model" and whatever format specified
+- If you have a new version please add the number 
+```bash
+deployment/
+└── layoutlm_onnx
+    ├── 1
+    │   └── model.onnx
+    └── config.pbtxt
 ```
 
 ## Run using onnxruntime

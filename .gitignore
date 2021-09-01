@@ -2,3 +2,4 @@ model/
 __pycache__/
 data/
 deployment/layoutlm_onnx/1/
+spare/

@@ -53,7 +53,7 @@ python test_trion_client.py
 NOTES:
 - Please follow the structure as such
 - The model name must be "model" and whatever format specified
-- If you have a new version please add the number 
+- If you have a new version please add the number specifying that version
 ```bash
 deployment/
 └── layoutlm_onnx
